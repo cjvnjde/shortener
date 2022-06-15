@@ -14,15 +14,15 @@ export class AddUrlTable implements Migration {
             PRIMARY KEY (uuid)
         );
     `;
-    
+
     await client.query(query);
   }
-  
+
   async down(client: PoolClient) {
     const query = `
         DROP TABLE urls;
     `;
-    
+
     await client.query(query);
   }
 }

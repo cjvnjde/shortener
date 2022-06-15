@@ -5,8 +5,8 @@ import { Response } from "express";
 export class ShortenCommand implements Command {
   async execute(data: CommandData, res: Response) {
     const urlEntity = new UrlEntity(data.client);
-    const key = await urlEntity.generateKey(String(data.query.url))
+    const key = await urlEntity.generateKey(String(data.body.url))
 
-    res.send(`http://localhost:3000/${key}`)
+    res.json({ key })
   }
 }

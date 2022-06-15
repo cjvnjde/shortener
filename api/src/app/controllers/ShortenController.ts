@@ -3,6 +3,6 @@ import { ShortenCommand } from "../commands/ShortenCommand";
 
 export class ShortenController extends Controller {
   protected init() {
-    this.router.get('/', this.execute(new ShortenCommand()))
+    this.router.post('/', this.execute(new ShortenCommand()))
   }
 }

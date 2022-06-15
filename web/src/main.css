@@ -1,0 +1,15 @@
+:root {
+    --background: #CEE5E7;
+    --white: #ffffff;
+    --main: #68C5CC;
+    --shadow: #E5E5E5;
+    --shadow2: #79D1D5;
+    --gray: #C4C4C4;
+    --main2: #BCFCFF;
+}
+
+body {
+    background-color: var(--background);
+    margin: 0;
+    padding: 0;
+}

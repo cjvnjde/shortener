@@ -1,24 +1,54 @@
-import { useState } from 'react'
+import React, { useEffect, useState } from "react";
+import { useShortenUrl } from "./hooks/useShortenUrl";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-  
+const App = () => {
+  const [url, setUrl] = useState("");
+  const { shortenUrl, submit } = useShortenUrl();
+
+  useEffect(() => {
+    const onPaste = (e: ClipboardEvent) => {
+      const { clipboardData } = e;
+      const pastedText = clipboardData?.getData("text") || "";
+
+      setUrl(pastedText);
+    };
+
+    document.body.addEventListener("paste", onPaste);
+
+    return () => {
+      document.body.removeEventListener("paste", onPaste);
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+    <div className="container">
+      <div className="field">
+        <input
+          className="field__input"
+          value={url} onChange={e => setUrl(e.target.value)}
+        />
+        <button
+          className="field__button"
+          onClick={() => submit(url)}
+        >
+          Submit
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
 
-export default App
+      <div className="shorten-url-wrapper">
+        {
+          Boolean(shortenUrl) && (
+            <div className="shorten-url-container">
+              <a href={shortenUrl}>
+                {shortenUrl}
+              </a>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  );
+};
+
+export default App;

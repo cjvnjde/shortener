@@ -3,7 +3,7 @@ import { Response, Request } from "express";
 
 export type CommandData = {
   client: PoolClient;
-  bode: Request['body'];
+  body: Request['body'];
   query: Request['query'];
   params: Request['params'];
 }
